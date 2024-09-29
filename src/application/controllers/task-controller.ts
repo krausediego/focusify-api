@@ -1,4 +1,4 @@
-import { ITask, ICreateTask } from '@/domain/interfaces';
+import { ITask, ICreateTask, IGetTaskById, IGetAllActiveTasks } from '@/domain/interfaces';
 
 import { getHttpError, ok } from '../helpers';
 import { Controller, Http } from '../interfaces';
@@ -22,5 +22,23 @@ export class TaskController implements Controller {
     });
 
     return ok({ ...content });
+  }
+
+  private async getTaskById({ params, locals }: IGetTaskById.ParamsService): Promise<Http.Response> {
+    const content = await (this.service() as IGetTaskById).run({
+      ...params,
+      userId: locals?.userId,
+    });
+
+    return ok({ ...content });
+  }
+
+  private async getAllActiveTasks({ params, locals }: IGetAllActiveTasks.ParamsService): Promise<Http.Response> {
+    const tasks = await (this.service() as IGetAllActiveTasks).run({
+      ...params,
+      userId: locals?.userId,
+    });
+
+    return ok({ tasks });
   }
 }

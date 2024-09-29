@@ -15,7 +15,7 @@ export class CreateTaskService implements ICreateTask {
 
     const dateConverted = format(new Date(date), "yyyy-MM-dd'T'HH:mm:ss'Z'");
 
-    if (isBefore(dateConverted, new Date())) {
+    if (isBefore(date, new Date().toISOString())) {
       throw new BadRequestError('This date is before today.');
     }
 

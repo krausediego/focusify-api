@@ -1,7 +1,7 @@
-import { ICreateTask } from '.';
+import { ICreateTask, IGetAllActiveTasks, IGetTaskById } from '.';
 
 export namespace ITask {
-  export type TaskServicesName = 'createTask';
+  export type TaskServicesName = 'createTask' | 'getTaskById' | 'getAllActiveTasks';
 
-  export type TaskServices = () => ICreateTask;
+  export type TaskServices = () => ICreateTask | IGetTaskById | IGetAllActiveTasks;
 }
